@@ -11,17 +11,20 @@ def main():
     parser.add_argument('-d', action='store_false', default=True, help='Do not de-duplicate items')
     parser.add_argument('-p', action='store_true', default=False, help='Use | instead of , to separate values')
     parser.add_argument('-s', action='store_false', default=True, help='Do not sort items')
+    parser.add_argument('-w', action='store_true', default=False, help='add whitespace after each comma or whitesapce on each side of pipe')
     args = parser.parse_args()
     quotes_on = args.q
     lower_case = args.l
     de_dupe_on = args.d
     pipe_on = args.p
     sorted_on = args.s
+    spaces = args.w
     print 'quotes_on='+str(quotes_on)
     print 'lower_case='+str(lower_case)
     print 'de_dupe_on='+str(de_dupe_on)
     print 'pipe_on='+str(pipe_on)
     print 'sorted_on='+str(sorted_on)
+    print 'spaces='+str(spaces)
     while True:
         line = raw_input()
         line = str(line).strip()
@@ -37,8 +40,12 @@ def main():
                 data.append(line)
             if de_dupe_on == False:
                 data.append(line)
-    if pipe_on == True:
+    if pipe_on == True and spaces == True:
+        separator = ' | '
+    elif pipe_on == True:
         separator = '|'
+    elif pipe_on == False:
+    	separator = ', '
     else:
         separator = ','
     if sorted_on == True:
