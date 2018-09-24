@@ -44,7 +44,7 @@ def main():
         separator = ' | '
     elif pipe_on == True:
         separator = '|'
-    elif pipe_on == False:
+    elif pipe_on == True:
     	separator = ', '
     else:
         separator = ','
