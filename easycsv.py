@@ -19,15 +19,14 @@ def main():
     pipe_on = args.p
     sorted_on = args.s
     spaces = args.w
-    print 'quotes_on='+str(quotes_on)
-    print 'lower_case='+str(lower_case)
-    print 'de_dupe_on='+str(de_dupe_on)
-    print 'pipe_on='+str(pipe_on)
-    print 'sorted_on='+str(sorted_on)
-    print 'spaces='+str(spaces)
+    print('quotes_on='+str(quotes_on))
+    print('lower_case='+str(lower_case))
+    print('de_dupe_on='+str(de_dupe_on))
+    print('pipe_on='+str(pipe_on))
+    print('sorted_on='+str(sorted_on))
+    print('spaces='+str(spaces))
     while True:
-        line = raw_input()
-        line = str(line).strip()
+        line = str(input()).strip()
         if line == '':
             break
         else:
@@ -51,7 +50,7 @@ def main():
     if sorted_on == True:
         data.sort()
     output = separator.join(str(x) for x in data)
-    print output
+    print(output)
     
 if __name__=="__main__":
     main()
