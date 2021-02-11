@@ -1,11 +1,8 @@
 #! /usr/bin/python
 import argparse
-import json
 import sys
 
 def main():
-	if sys.version_info[0] < 3:
-		raise Exception("Must be using Python 3")
 	data = []
 	output = ''
 	parser = argparse.ArgumentParser(description='This program will create a comma-delimited string from a given input.')
@@ -29,14 +26,16 @@ def main():
 	print('sorted_on='+str(sorted_on))
 	print('spaces='+str(spaces))
 	while True:
-		line = str(input()).strip()
+		if sys.version_info[0] < 3:
+			line = str(raw_input()).strip()
+		else:
+			line = str(input()).strip()
 		if line == '':
 			break
 		else:
 			if lower_case == True:
 				line = line.lower()
 			if quotes_on == True:
-				#line = json.dumps(line)
 				line = '\"'+line+'\"'
 			if de_dupe_on == True and line not in data:
 				data.append(line)
