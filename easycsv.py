@@ -46,7 +46,7 @@ def main():
 					except ValueError:
 						print("error: number flag set to True but string detected in input. Exiting.")
 						quit()
-			if lower_case == True and integer_input == False:
+			if lower_case == True and number_input == False:
 				line = line.lower()
 			if quotes_on == True:
 				line = '\"'+line+'\"'
