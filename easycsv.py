@@ -12,6 +12,7 @@ def main():
 	parser.add_argument('-p', action='store_true', default=False, help='Use | instead of , to separate values')
 	parser.add_argument('-s', action='store_false', default=True, help='Do not sort items')
 	parser.add_argument('-w', action='store_true', default=False, help='add whitespace after each comma or whitesapce on each side of pipe')
+	parser.add_argument('-n', action='store_true', default=False, help='treat input as numbers for sorting')
 	args = parser.parse_args()
 	quotes_on = args.q
 	lower_case = args.l
@@ -19,12 +20,14 @@ def main():
 	pipe_on = args.p
 	sorted_on = args.s
 	spaces = args.w
+	number_input = args.n
 	print('quotes_on='+str(quotes_on))
 	print('lower_case='+str(lower_case))
 	print('de_dupe_on='+str(de_dupe_on))
 	print('pipe_on='+str(pipe_on))
 	print('sorted_on='+str(sorted_on))
 	print('spaces='+str(spaces))
+	print('number_input='+str(number_input))
 	while True:
 		if sys.version_info[0] < 3:
 			line = str(raw_input()).strip()
@@ -33,7 +36,17 @@ def main():
 		if line == '':
 			break
 		else:
-			if lower_case == True:
+			if number_input == True:
+				try:
+					line = int(line)
+				except ValueError:
+					#number_input_error = True
+					try:
+						line = float(line)
+					except ValueError:
+						print("error: number flag set to True but string detected in input. Exiting.")
+						quit()
+			if lower_case == True and integer_input == False:
 				line = line.lower()
 			if quotes_on == True:
 				line = '\"'+line+'\"'
