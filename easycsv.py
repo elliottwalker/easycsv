@@ -6,7 +6,8 @@ def main():
 	data = []
 	output = ''
 	parser = argparse.ArgumentParser(description='This program will create a comma-delimited string from a given input.')
-	parser.add_argument('-q', action='store_true', default=False, help='Add quotes to each item')
+	parser.add_argument('-q', action='store_true', default=False, help='Add double quotes to each item')
+	parser.add_argument('-a', action='store_true', default=False, help='Add single quotes to each item')
 	parser.add_argument('-l', action='store_true', default=False, help='Force lowercase')
 	parser.add_argument('-d', action='store_false', default=True, help='Do not de-duplicate items')
 	parser.add_argument('-p', action='store_true', default=False, help='Use | instead of , to separate values')
@@ -14,14 +15,16 @@ def main():
 	parser.add_argument('-w', action='store_true', default=False, help='add whitespace after each comma or whitesapce on each side of pipe')
 	parser.add_argument('-n', action='store_true', default=False, help='treat input as numbers for sorting')
 	args = parser.parse_args()
-	quotes_on = args.q
+	double_quotes_on = args.q
+	single_quotes_on = args.a
 	lower_case = args.l
 	de_dupe_on = args.d
 	pipe_on = args.p
 	sorted_on = args.s
 	spaces = args.w
 	number_input = args.n
-	print('quotes_on='+str(quotes_on))
+	print('double_quotes_on='+str(double_quotes_on))
+	print('single_quotes_on='+str(single_quotes_on))
 	print('lower_case='+str(lower_case))
 	print('de_dupe_on='+str(de_dupe_on))
 	print('pipe_on='+str(pipe_on))
@@ -48,8 +51,10 @@ def main():
 						quit()
 			if lower_case == True and number_input == False:
 				line = line.lower()
-			if quotes_on == True:
+			if double_quotes_on == True:
 				line = '\"'+line+'\"'
+			if single_quotes_on == True:
+				line = '\''+line+'\''
 			if de_dupe_on == True and line not in data:
 				data.append(line)
 			if de_dupe_on == False:
