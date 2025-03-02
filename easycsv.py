@@ -11,6 +11,7 @@ def main():
 	parser.add_argument('-l', action='store_true', default=False, help='Force lowercase')
 	parser.add_argument('-d', action='store_false', default=True, help='Do not de-duplicate items')
 	parser.add_argument('-p', action='store_true', default=False, help='Use | instead of , to separate values')
+	parser.add_argument('-x', action='store_true', default=False, help='Use [whitespace] instead of , to separate values')
 	parser.add_argument('-s', action='store_false', default=True, help='Do not sort items')
 	parser.add_argument('-w', action='store_true', default=False, help='add whitespace after each comma or whitesapce on each side of pipe')
 	parser.add_argument('-n', action='store_true', default=False, help='treat input as numbers for sorting')
@@ -23,11 +24,13 @@ def main():
 	sorted_on = args.s
 	spaces = args.w
 	number_input = args.n
+	whitespace_on = args.x
 	print('double_quotes_on='+str(double_quotes_on))
 	print('single_quotes_on='+str(single_quotes_on))
 	print('lower_case='+str(lower_case))
 	print('de_dupe_on='+str(de_dupe_on))
 	print('pipe_on='+str(pipe_on))
+	print('whitespace_on'+str(whitespace_on))
 	print('sorted_on='+str(sorted_on))
 	print('spaces='+str(spaces))
 	print('number_input='+str(number_input))
@@ -63,6 +66,8 @@ def main():
 		separator = ' | '
 	elif pipe_on == True:
 		separator = '|'
+	elif whitespace_on == True:
+		separator = ' '
 	elif spaces == True:
 		separator = ', '
 	else:
